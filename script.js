@@ -1,42 +1,56 @@
 function readFile() {
 	let brutFile = document.getElementById('brutFile').files[0];
 
-	let fileContent = "";
+	var fileContent = "";
 
-	readFileIntoMemory(brutFile, function(fileInfo) {
-		console.log("file type: ", fileInfo.type);
-	    // console.info("Read file " + fileInfo.name + " of size " + fileInfo.size);
-	    fileContent = new TextDecoder().decode(fileInfo.content);
+	// readFileIntoMemory(brutFile, function(fileInfo) {
+	// 	// console.log("file type: ", fileInfo.type);
+	//     // console.info("Read file " + fileInfo.name + " of size " + fileInfo.size);
+	//     fileContent = new TextDecoder().decode(fileInfo.content);
 
-	    reformatToCSV(fileContent);
-	});
+	//     reformatToCSV(fileContent);
+	// });
+
+	if (brutFile) {
+	    var reader = new FileReader();
+	    reader.readAsText(brutFile, "UTF-16");
+	    reader.onload = function (evt) {
+	    	fileContent = evt.target.result;
+	        reformatToCSV(fileContent);
+	    }
+	    reader.onerror = function (evt) {
+	        console.log("error reading file");
+	    }
+	}
 }
 
 function reformatToCSV(fileContent) {
-	console.log(fileContent);
-	fileContent = replaceAll(fileContent, '\n                             ', '');
+	// console.log(fileContent);
+	// fileContent = replaceAll(fileContent, '\n                             ', '');
 	fileContent = fileContent.split('\n');
 
-	let dictAttributsVal = {};
-	let numUsers = 0;
+	var dictAttributsVal = {};
+	var numUsers = 0;
 
-	for(let elem in fileContent) {
+	for(var elem in fileContent) {
 		if(fileContent[elem].trim() == '') {
 			numUsers += 1;
 		} else {
-			let attribute = fileContent[elem].split(':')[0].trim();
-			attribute = replaceAll(attribute, ',', '/');
-			attribute = replaceAll(attribute, ';', '/');
-			let value = fileContent[elem].replace(fileContent[elem].split(':')[0]+':', '').trim();
-			value = replaceAll(value, ',', '/');
-			value = replaceAll(value, ';', '/');
-			// console.log((attribute+' : '+value));
+			if (fileContent[elem].split(':').length >= 2) {
+				var attribute = fileContent[elem].split(':')[0].trim();
+				attribute = replaceAll(attribute, ',', '/');
+				attribute = replaceAll(attribute, ';', '/');
+				var value = fileContent[elem].replace(fileContent[elem].split(':')[0]+':', '').trim();
+				value = replaceAll(value, ',', '/');
+				value = replaceAll(value, ';', '/');
+				// console.log((attribute+' : '+value));
 
-			if(attribute in dictAttributsVal) {
-				dictAttributsVal[attribute][numUsers] = value;
-			} else {
-				dictAttributsVal[attribute] = {};
-				dictAttributsVal[attribute][numUsers] = value;
+				if(attribute in dictAttributsVal) {
+					dictAttributsVal[attribute][numUsers] = value;
+				} else {
+					dictAttributsVal[attribute] = {};
+					dictAttributsVal[attribute][numUsers] = value;
+				}
 			}
 		}
 	}
@@ -45,15 +59,15 @@ function reformatToCSV(fileContent) {
 }
 
 function csvBakerFromDict(numUsers, dictAttributsVal) {
-	let result = "";
-	let attributs = "";
-	for(let elem in dictAttributsVal) {
+	var result = "";
+	var attributs = "";
+	for(var elem in dictAttributsVal) {
 		attributs += elem + ',';
 	}
 	result = attributs.slice(0, -1) + ';\n';
 
-	for(let i = 0; i < numUsers; i++) {
-		for(let elem in dictAttributsVal) {
+	for(var i = 0; i < numUsers; i++) {
+		for(var elem in dictAttributsVal) {
 			if(i in dictAttributsVal[elem]) {
 				result += dictAttributsVal[elem][i] + ',';
 			} else {
