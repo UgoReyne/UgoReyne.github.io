@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookmarklets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">My Bookmarklets</h1>
+        
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a href="javascript:(function () { let get_file_info_url = `https://docs.google.com/document/d/${_docs_flag_initialData['docs-ci']}/docdetails/read?id=${_docs_flag_initialData['docs-ci']}&token=${_docs_flag_initialData.info_params.token}&includes_info_params=true&usp=drive_web&cros_files=false&tab=t.0`; fetch(get_file_info_url, {method: 'GET'}) .then((response) => response.text()) .then((res) => { let res_json = JSON.parse(res.replace('\)]}\'', '')); let parent_folder_url = `https://drive.google.com/drive/folders/${res_json.PARENTS[0].objectId}`; window.open(parent_folder_url, '_blank'); }); } )();" class="text-decoration-none">Parent Folder</a></h5>
+                <p class="card-text">On a google opened document, the bookmarklet opens a new tab on the parent folder.</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a href="javascript:document.body.contentEditable='true'; document.designMode='on'; void 0" class="text-decoration-none">Edit</a></h5>
+                <p class="card-text">Let you edit the text of any pages, usefull for screenshots with specific texts before updating the code.</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a href="javascript:var clicked,buttons=document.createElement('div');buttons.setAttribute('style','position: fixed; z-index: 1300; top: 90%; left: 90%;');var removeBtn=document.createElement('button');removeBtn.id='remove_btn',removeBtn.innerHTML='%E2%9C%94',removeBtn.setAttribute('style','margin-right: 20px; width: 40px; height: 40px; border: 0px solid grey; border-radius: 50%; background: #2ED053;%20text-align:%20center;%20font-size:%2022px;%20line-height:%2040px;%20cursor:%20pointer;%22'),removeBtn.addEventListener(%22click%22,function(){clicked=%22%E2%9C%94%22==removeBtn.innerHTML?(removeBtn.innerHTML=%22x%22,document.getElementById(%22remove_btn%22).style.background=%22#f44336%22,1):(removeBtn.innerHTML=%22%E2%9C%94%22,document.getElementById(%22remove_btn%22).style.background=%22#2ED053%22,0)});var%20scrollBtn=document.createElement(%22button%22);function%20whichElement(e){var%20t;clicked||((e=e||window.event).target?t=e.target:e.srcElement&&(t=e.srcElement),%22remove_btn%22!=(e=t.id)&&%22scroll_btn%22!=e&&t.remove())}scrollBtn.id=%22scroll_btn%22,scrollBtn.innerHTML=%22%E2%86%A8%22,scrollBtn.setAttribute(%22style%22,%22margin-right:%2020px;%20width:%2040px;%20height:%2040px;%20border:%200px%20solid%20grey;%20border-radius:%2050%;%20background:%20#DBE9F0;%20text-align:%20center;%20font-size:%2022px;%20line-height:%2040px;%20cursor:%20pointer;%22),scrollBtn.addEventListener(%22click%22,function(){document.body.setAttribute(%22style%22,%22overflow:visible%20!important%22)}),buttons.appendChild(removeBtn),buttons.appendChild(scrollBtn),document.body.appendChild(buttons),document.body.addEventListener(%22mousedown%22,whichElement);" class="text-decoration-none">Remove Div</a></h5>
+                <p class="card-text">Let you remove any popups that blocks the content behind it.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
