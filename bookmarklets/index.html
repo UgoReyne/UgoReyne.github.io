@@ -12,7 +12,7 @@
         
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title"><a href="(function () { let pathname = window.location.pathname.split('/'); let get_file_info_url = `https://docs.google.com/${pathname[1]}/${pathname[2]}/${pathname[3]}/docdetails/read?id=${_docs_flag_initialData['docs-ci']}&token=${_docs_flag_initialData.info_params.token}&includes_info_params=true&usp=drive_web&cros_files=false&tab=t.0`; fetch(get_file_info_url, {method: 'GET'}) .then((response) => response.text()) .then((res) => { let res_json = JSON.parse(res.replace('\)]}\'', '')); let parent_folder_url = `https://drive.google.com/drive/folders/${res_json.PARENTS[0].objectId}`; window.open(parent_folder_url, '_blank'); }); } )();" class="text-decoration-none">
+                <h5 class="card-title"><a href="javascript:(function () { let pathname = window.location.pathname.split('/'); let get_file_info_url = `https://docs.google.com/${pathname[1]}/${pathname[2]}/${pathname[3]}/docdetails/read?id=${_docs_flag_initialData['docs-ci']}&token=${_docs_flag_initialData.info_params.token}&includes_info_params=true&usp=drive_web&cros_files=false&tab=t.0`; fetch(get_file_info_url, {method: 'GET'}) .then((response) => response.text()) .then((res) => { let res_json = JSON.parse(res.replace('\)]}\'', '')); let parent_folder_url = `https://drive.google.com/drive/folders/${res_json.PARENTS[0].objectId}`; window.open(parent_folder_url, '_blank'); }); } )();" class="text-decoration-none">
                     Parent Folder</a></h5>
                 <p class="card-text">On a google opened document, the bookmarklet opens a new tab on the parent folder.</p>
             </div>
